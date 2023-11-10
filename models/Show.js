@@ -6,7 +6,7 @@ const Show = db.define("shows", {
     title: DataTypes.STRING,
     genre: DataTypes.STRING,
     rating: DataTypes.INTEGER,
-    available: DataTypes.BOOLEAN,
+    available: DataTypes.STRING,
 });
 
 //exports
