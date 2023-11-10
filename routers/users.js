@@ -11,15 +11,17 @@ usersRouter.get("/:id", async (req, res) => {
     res.json(await User.findByPk(req.params.id));
 })
 
-usersRouter.get("/shows/:id", async (req, res) => {
+usersRouter.get("/:id/shows", async (req, res) => {
     let watchedShows = await User.findByPk(req.params.id, {include: Show})
     watchedShows = watchedShows.shows
     res.json(watchedShows);
 })
 
-usersRouter.put("/", async (req, res) => {
-    await User.create(req.body);
-    res.json("Done.")
+usersRouter.put("/:id/shows/:showId", async (req, res) => {
+    const user = await User.findByPk(req.params.id, {include: Show});
+    const show = await Show.findByPk(req.params.showId);
+    await user.addShow(show);
+    res.json(user)
 })
 
 
